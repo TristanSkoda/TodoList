@@ -9,16 +9,23 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-        name: 'manger',
-        isDone: false
+        todos : [{
+          name: 'manger',
+          isDone: false
+        }]
     }
     
 }
 
   handler = event =>{
-    this.setState(s{
+    
+    const todo = {
       name: event.target.value,
-      isDone: flase
+      isDone: false
+    }
+    this.setState({
+    todos = this.state.todos.concat([todo])
+      todos: array
     });
   }
   render() {
