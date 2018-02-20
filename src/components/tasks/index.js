@@ -17,7 +17,7 @@ class Tasks extends Component {
    
     return (
       <div className="Tasks-container" >         
-      {this.props.todos.map((todo, index)=> <Task className={ this.props.isClicked ? 'task-isClicked' : '' } onClick={() => this.props.onClick(index)}  key={index} name={todo.name} /> )}
+      {this.props.todos.map((todo, index)=> <Task onClick={() => this.props.onClick(index)} taskIsClicked={todo.isClicked}  key={index} name={todo.name} /> )}
       </div>
     );
   }

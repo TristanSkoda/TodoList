@@ -9,6 +9,7 @@
     box-shadow: 3px 4px 4px #888888;
     justify-content: space-between;
     margin-bottom: 1px;
+    transition: .5s ease all; 
 }
 
 .task-container h2{
@@ -30,7 +31,6 @@
 }
 
 .task-isClicked{
-    text-decoration-color: gray;
     transition: .5s ease all; 
     transform: translateX(20px);
 }
