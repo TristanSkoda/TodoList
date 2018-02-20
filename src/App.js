@@ -51,19 +51,16 @@ class App extends Component {
     this.setState({todos});
   }
 
-  handleOnClick = (pIndex)=>{
-    
+  handleOnClick = (pIndex)=>
     this.setState({todos :
-      this.state.todos.map((todo, index)=>{
+      this.state.todos.map((todo, index)=>
         index === pIndex?
-        todo = {
-          name: todo.name,
-          isDone: todo.isDone,
+        {
+          ...todo,
           isClicked: todo.isClicked? false : true
         } : todo
-      })
+      )
     })
-  }
 
   render() {
     return (

@@ -34,3 +34,7 @@
     transition: .5s ease all; 
     transform: translateX(20px);
 }
+.task-isClicked h2{
+    color: gray;
+}
+    

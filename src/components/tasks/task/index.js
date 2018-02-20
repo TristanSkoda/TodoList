@@ -8,7 +8,7 @@ class Task extends Component {
     return (
       <div className={ this.props.taskIsClicked ? 'task-isClicked task-container'  : ' task-container' } onClick={this.props.onClick}>
         <h2> {this.props.name} </h2>
-        <button>Done</button>
+        <button>Done</button >
       </div>
     );
   }

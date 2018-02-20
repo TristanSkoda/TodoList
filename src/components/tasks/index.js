@@ -5,16 +5,7 @@ import './styles.css';
 
 
 class Tasks extends Component {
-  constructor(){
-    super();
-
-    
-  }
-
-
-  
   render() {
-   
     return (
       <div className="Tasks-container" >         
       {this.props.todos.map((todo, index)=> <Task onClick={() => this.props.onClick(index)} taskIsClicked={todo.isClicked}  key={index} name={todo.name} /> )}
