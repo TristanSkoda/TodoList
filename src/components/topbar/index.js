@@ -3,18 +3,29 @@ import React, { Component } from 'react';
 import './styles.css';
 
 class TopBar extends Component {
- onSubmit = (event) =>{
-  event.preventDefault();
-  console.log('target value: ', event.target.value)
-  this.props.handler(event.target.value);
- }
+  constructor(props){
+    super(props);
+
+    this.state= {value: ''}
+  }
+  handleChange = event =>{
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit = (event) =>{
+    event.preventDefault();
+    if(this.state.value !== ''){
+      this.props.handleName(this.state.value);
+      this.setState({value : ''})
+    }
+  }
 
   render() {
     return (
-      <div className="TopBar-container">
-          <form onSubmit={this.onSubmit}> 
-            <input type="text" name="name" placeholder='enter a task'></input>
-            <button >submit</button>
+      <div className="topbar-container">
+          <form onSubmit={this.handleSubmit} className="topbar-container-form" > 
+            <input type="text" value={this.state.value} onChange={this.handleChange} placeholder='enter a task'></input>
+            <button>submit</button>
           </form>
       </div>
     )

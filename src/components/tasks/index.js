@@ -5,12 +5,24 @@ import './styles.css';
 
 
 class Tasks extends Component {
+  constructor(){
+    super();
+
+    
+  }
+
+  handleClick=event=>{
+    event.preventDefault();
+    
+    this.setState({})
+
+  }
   
   render() {
    
     return (
       <div className="Tasks-container" >         
-        {this.props.todos.map((todo, index)=> <Task key={index} {...todo}/> )}
+      {this.props.todos.map((todo, index)=> <Task className={ this.props.isClicked ? 'task-isClicked' : '' } onClick={this.handleClick}  key={index} {...todo}/> )}
       </div>
     );
   }

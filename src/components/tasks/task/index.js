@@ -5,8 +5,9 @@ import './styles.css';
 class Task extends Component {
   render() {
     return (
-      <div className="task-constainer" >
-        <h1> {this.props.name} </h1>
+      <div className="task-container">
+        <h2> {this.props.name} </h2>
+        <button>Done</button>
       </div>
     );
   }

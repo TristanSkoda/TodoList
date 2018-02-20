@@ -12,30 +12,35 @@ class App extends Component {
     this.state = {
         todos : [{
           name: 'manger',
-          isDone: false
+          isDone: false,
+          isClicked: false
         },
         {
           name: 'salut',
-          isDone: false
+          isDone: false,
+          isClicked: false
         },
         {
           name: 'allo',
-          isDone: false
+          isDone: false,
+          isClicked: false
         },
         {
           name: 'coucou',
-          isDone: false
+          isDone: false,
+          isClicked: false
         },
         {
           name: 'manger',
-          isDone: false
+          isDone: false,
+          isClicked: false
         },
       ]
     }
     
 }
 
-  handler = (name) =>{
+  handleName = (name) =>{
     console.log('name : ',name)
     const todos = this.state.todos;
     todos.push({
@@ -45,12 +50,18 @@ class App extends Component {
     
     this.setState({todos});
   }
+
+  handleOnClick = ()=>{
+
+  }
+
   render() {
     return (
       <div className="App">
+      <h1>Todo List</h1>
         <div className="app-container">
-          <TopBar handler={this.handler}/> 
-          <Tasks {...this.state} />
+          <TopBar handleName={this.handleName}/> 
+          <Tasks {...this.state} onClick={this.handleOnClick} />
         </div>
       </div>
     );
