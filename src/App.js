@@ -43,36 +43,34 @@ class App extends Component {
 
 
   handleName = (name) =>{
-    console.log('name : ',name)
     const todos = this.state.todos;
     todos.push({
       name,
       isDone: false    
     })
-    
     this.setState({todos});
   }
 
   handleOnClick = (pIndex)=>{
+    
+    this.setState({todos :
     this.state.todos.map((todo, index)=>{
-      if(index === pIndex){
-        todo.isClicked?
-          this.setState({
-            todo: {
-              name: this.name,
-              isDone: this.isDone,
-              isClicked: false
-            }
-          })
-        :this.setState({
-          todo: {
+       if(index === pIndex){
+         todo.isClicked?
+         todo = {
+           name: this.name,
+           isDone: this.isDone,
+           isClicked: false
+          }
+          :
+          todo = {
             name: this.name,
             isDone: this.isDone,
             isClicked: true
           }
-        })
-      }
-    })
+        }
+      })
+    });
   }
 
   render() {
