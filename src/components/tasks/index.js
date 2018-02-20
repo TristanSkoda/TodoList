@@ -14,7 +14,7 @@ class Tasks extends Component {
   handleClick=event=>{
     event.preventDefault();
     
-    this.setState({})
+    console.log('test: ');
 
   }
   
@@ -22,7 +22,7 @@ class Tasks extends Component {
    
     return (
       <div className="Tasks-container" >         
-      {this.props.todos.map((todo, index)=> <Task className={ this.props.isClicked ? 'task-isClicked' : '' } onClick={this.handleClick}  key={index} {...todo}/> )}
+      {this.props.todos.map((todo, index)=> <Task className={ this.props.isClicked ? 'task-isClicked' : '' } onClick={this.handleClick}  key={index} name={todo.name} /> )}
       </div>
     );
   }

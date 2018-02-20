@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './css/general.css';
 import './css/reset.css';
+import './css/App.css';
 
 import Tasks from './components/tasks';
 import TopBar from './components/topbar';
@@ -52,7 +53,9 @@ class App extends Component {
   }
 
   handleOnClick = ()=>{
-
+    if(this.state.todos.isClicked === false){
+      this.setState({})
+    }
   }
 
   render() {

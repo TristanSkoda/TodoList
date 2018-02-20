@@ -64,28 +64,6 @@ textarea:focus, input:focus{
   color: #008489;
 }
 
-
-
-.App{
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12%;
-  flex-direction: column;
-}
-
-.App h1{
-  margin-bottom: 20px;
-}
-.app-container{
-  
-  width: 600px;
-  
-}
-
-
-
 @media (max-width: 1200px) { 
 	.main-container{
     margin: 0 3%;

@@ -22,6 +22,24 @@
   font-size: large;
 }
 
+.App{
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12%;
+  flex-direction: column;
+}
+
+.App h1{
+  margin-bottom: 20px;
+}
+.app-container{
+  
+  width: 600px;
+  
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
