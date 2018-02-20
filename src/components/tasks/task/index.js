@@ -6,7 +6,7 @@ class Task extends Component {
   
   render() {
     return (
-      <div className="task-container"  onClick={this.props.handleClick}>
+      <div className="task-container"  onClick={this.props.onClick}>
         <h2> {this.props.name} </h2>
         <button>Done</button>
       </div>

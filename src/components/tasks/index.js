@@ -11,18 +11,13 @@ class Tasks extends Component {
     
   }
 
-  handleClick=event=>{
-    event.preventDefault();
-    
-    console.log('test: ');
 
-  }
   
   render() {
    
     return (
       <div className="Tasks-container" >         
-      {this.props.todos.map((todo, index)=> <Task className={ this.props.isClicked ? 'task-isClicked' : '' } onClick={this.handleClick}  key={index} name={todo.name} /> )}
+      {this.props.todos.map((todo, index)=> <Task className={ this.props.isClicked ? 'task-isClicked' : '' } onClick={() => this.props.onClick(index)}  key={index} name={todo.name} /> )}
       </div>
     );
   }
