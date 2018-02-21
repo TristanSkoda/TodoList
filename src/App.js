@@ -65,7 +65,7 @@ class App extends Component {
 
     handleChange = taskName => this.setState({ topBar: taskName })
 
-
+    
 
     handleOnClickDone = pIndex =>{
       let array = this.state.todos.slice();
@@ -77,6 +77,7 @@ class App extends Component {
 
   render() {
     const {topBar, todos} = this.state;
+    console.log("salut oui j'ai push de quoi");
     return (
       <div className="App">
       <h1>Todo List</h1>
