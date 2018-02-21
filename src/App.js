@@ -61,6 +61,24 @@ class App extends Component {
         } : todo
       )
     })
+    handleOnClick = (pIndex)=>
+    this.setState({todos :
+      this.state.todos.map((todo, index)=>
+        index === pIndex?
+        {
+          ...todo,
+          isClicked: todo.isClicked? false : true
+        } : todo
+      )
+    })
+
+    handleOnClickDone = pIndex =>{
+      let array = this.state.todos.slice();
+      array.splice(pIndex, 1);
+      this.setState({
+        todos: array
+      })
+    }
 
   render() {
     return (
@@ -68,7 +86,7 @@ class App extends Component {
       <h1>Todo List</h1>
         <div className="app-container">
           <TopBar handleName={this.handleName}/> 
-          <Tasks {...this.state} onClick={this.handleOnClick} />
+          <Tasks {...this.state} onClickDone={this.handleOnClickDone} onClick={this.handleOnClick} />
         </div>
       </div>
     );

@@ -8,7 +8,8 @@ class Tasks extends Component {
   render() {
     return (
       <div className="Tasks-container" >         
-      {this.props.todos.map((todo, index)=> <Task onClick={() => this.props.onClick(index)} taskIsClicked={todo.isClicked}  key={index} name={todo.name} /> )}
+        {this.props.todos.map((todo, index)=> <Task onClick={() => this.props.onClick(index)}
+         taskIsClicked={todo.isClicked} onClickDone={()=> this.props.onClickDone(index)} doneIsClicked={todo.isDone}  key={index} name={todo.name} /> )}
       </div>
     );
   }

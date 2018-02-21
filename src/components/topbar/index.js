@@ -20,12 +20,14 @@ class TopBar extends Component {
     }
   }
 
+ 
+
   render() {
     return (
       <div className="topbar-container">
           <form onSubmit={this.handleSubmit} className="topbar-container-form" > 
-            <input type="text" value={this.state.value} onChange={this.handleChange} placeholder='enter a task'></input>
-            <button>submit</button>
+            <input type="text" value={this.state.value} onChange={this.handleChange} placeholder='Enter a task'></input>
+            <button >Submit</button>
           </form>
       </div>
     )

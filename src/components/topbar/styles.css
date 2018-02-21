@@ -11,6 +11,7 @@
 }
 
 .topbar-container-form button{
+    outline: none;
     cursor: pointer;
     background-color: rgb(0,132,255);
     border: none;
@@ -23,6 +24,7 @@
     display: inline-block;
     font-size: 16px;
 }
+
 .topbar-container-form input{
     border-radius: 30px;
     
