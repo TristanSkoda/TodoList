@@ -84,7 +84,8 @@ class App extends Component {
       <h1>Todo List</h1>
         <div className="app-container">
           <TopBar onChange={this.handleChange} handleAddTask={this.addTask}/> 
-          <Tasks todos={topBar === ''? todos : this.state.todos.filter(todo => todo.name.includes(topBar))} onClickDone={this.handleOnClickDone} onClick={this.handleOnClick} />
+          <Tasks todos={topBar === ''? todos : this.state.todos.filter(todo => todo.name.includes(topBar))}
+           onClickDone={this.handleOnClickDone} onClick={this.handleOnClick} />
         </div>
       </div>
     );

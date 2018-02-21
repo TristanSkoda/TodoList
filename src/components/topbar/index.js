@@ -10,7 +10,7 @@ class TopBar extends Component {
   }
   handleChange = event =>{
     this.setState({value: event.target.value});
-    
+
     this.props.onChange(event.target.value);
   }
 
@@ -18,7 +18,7 @@ class TopBar extends Component {
     event.preventDefault();
     if(this.state.value !== ''){
       this.props.handleAddTask(this.state.value);
-      this.setState({value : ''})
+      this.setState({})
     }
   }
 
