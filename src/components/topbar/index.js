@@ -10,12 +10,14 @@ class TopBar extends Component {
   }
   handleChange = event =>{
     this.setState({value: event.target.value});
+    
+    this.props.onChange(event.target.value);
   }
 
   handleSubmit = (event) =>{
     event.preventDefault();
     if(this.state.value !== ''){
-      this.props.handleName(this.state.value);
+      this.props.handleAddTask(this.state.value);
       this.setState({value : ''})
     }
   }

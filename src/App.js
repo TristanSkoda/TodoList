@@ -36,13 +36,14 @@ class App extends Component {
           isDone: false,
           isClicked: false
         },
-      ]
+      ],
+      topBar : ''
     }
     
 }
 
 
-  handleName = (name) =>{
+  addTask = (name) =>{
     const todos = this.state.todos;
     todos.push({
       name,
@@ -61,16 +62,10 @@ class App extends Component {
         } : todo
       )
     })
-    handleOnClick = (pIndex)=>
-    this.setState({todos :
-      this.state.todos.map((todo, index)=>
-        index === pIndex?
-        {
-          ...todo,
-          isClicked: todo.isClicked? false : true
-        } : todo
-      )
-    })
+
+    handleChange = taskName => this.setState({ topBar: taskName })
+
+
 
     handleOnClickDone = pIndex =>{
       let array = this.state.todos.slice();
@@ -81,12 +76,13 @@ class App extends Component {
     }
 
   render() {
+    const {topBar, todos} = this.state;
     return (
       <div className="App">
       <h1>Todo List</h1>
         <div className="app-container">
-          <TopBar handleName={this.handleName}/> 
-          <Tasks {...this.state} onClickDone={this.handleOnClickDone} onClick={this.handleOnClick} />
+          <TopBar onChange={this.handleChange} handleAddTask={this.addTask}/> 
+          <Tasks todos={topBar === ''? todos : this.state.todos.filter(todo => todo.name.includes(topBar))} onClickDone={this.handleOnClickDone} onClick={this.handleOnClick} />
         </div>
       </div>
     );
