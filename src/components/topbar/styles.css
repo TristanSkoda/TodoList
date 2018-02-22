@@ -1,14 +1,21 @@
+.topbar-container{
+    background-color: #f1f1f1;    
+    border-radius: 30px;
+}
+
+
 .topbar-container-form{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgba(179, 179, 179, 0.5) ;
+    
     border-radius: 30px;
     height: 60px;
     box-shadow: 3px 4px 4px #888888;
     margin-bottom: 1px;
     
 }
+
 
 .topbar-container-form button{
     outline: none;
@@ -21,13 +28,14 @@
     text-align: center;
     height: 100%;
     text-decoration: none;
+    user-select: none;
     display: inline-block;
     font-size: 16px;
 }
 
 .topbar-container-form input{
     border-radius: 30px;
-    
+    user-select: none;
     background-color: #f1f1f1;
     padding-left: 20px;
     height: 100%;

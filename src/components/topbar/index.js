@@ -16,19 +16,17 @@ class TopBar extends Component {
 
   handleSubmit = (event) =>{
     event.preventDefault();
+
     if(this.state.value !== ''){
       this.props.handleAddTask(this.state.value);
-      this.setState({})
     }
   }
-
- 
 
   render() {
     return (
       <div className="topbar-container">
           <form onSubmit={this.handleSubmit} className="topbar-container-form" > 
-            <input type="text" value={this.state.value} onChange={this.handleChange} placeholder='Enter a task'></input>
+            <input type="text" onChange={this.handleChange} placeholder='Enter a task'></input>
             <button >Submit</button>
           </form>
       </div>
