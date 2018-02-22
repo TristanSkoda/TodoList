@@ -8,6 +8,8 @@ import Tasks from './components/tasks';
 import TopBar from './components/topbar';
 import BottomBar from './components/bottombar';
 
+console.log("test")
+
 class App extends Component {
   constructor() {
     super();
@@ -69,7 +71,9 @@ class App extends Component {
   handleOption = pOption => this.setState({option: pOption})
 
   render() {
+
     const { topBar, todos , option} = this.state;
+
     return (
       <div className="App">
         <h1>Todo List</h1>
