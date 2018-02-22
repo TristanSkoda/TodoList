@@ -10,6 +10,7 @@ import BottomBar from './components/bottombar';
 
 console.log("test")
 
+
 class App extends Component {
   constructor() {
     super();
