@@ -74,6 +74,7 @@ class App extends Component {
 
     const { topBar, todos , option} = this.state;
 
+    
     return (
       <div className="App">
         <h1>Todo List</h1>
