@@ -28,3 +28,13 @@
     font-size: 16px;
     user-select: none;
 }
+
+.bottombar-container .selected{
+    background-color: rgb(0, 89, 255);
+    transition: .5s ease all;
+}
+
+.clearall:hover{
+    background-color: rgb(0, 89, 255);
+    transition: .5s ease all; 
+}

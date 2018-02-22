@@ -15,33 +15,27 @@ class App extends Component {
       todos: [{
         name: 'manger',
         isDone: false,
-        isClicked: false
       },
       {
         name: 'salut',
         isDone: false,
-        isClicked: false
       },
       {
         name: 'allo',
         isDone: false,
-        isClicked: false
       },
       {
         name: 'coucou',
         isDone: false,
-        isClicked: false
       },
       {
         name: 'manger',
         isDone: false,
-        isClicked: false
       },
       ],
       topBar: '',
       option: 'All'
     }
-
   }
 
 
@@ -61,7 +55,7 @@ class App extends Component {
           index === pIndex ?
             {
               ...todo,
-              isClicked: !todo.isClicked
+              isDone: !todo.isDone
             } : todo
         )
     })
@@ -70,22 +64,24 @@ class App extends Component {
 
   handleOnClickDone = pIndex => this.setState({ todos: this.state.todos.filter((todo, index) => index !== pIndex) })
 
-    handleClearAllDone = () => {
-      
-    }
-  handleOption = option => this.setState({option})
+  handleClearAllDone = () => this.setState({todos: this.state.todos.filter(todo =>!todo.isDone )})
+
+  handleOption = pOption => this.setState({option: pOption})
 
   render() {
-    const { topBar, todos } = this.state;
-    console.log('opiton: ',this.state.option)
+    const { topBar, todos , option} = this.state;
     return (
       <div className="App">
         <h1>Todo List</h1>
         <div className="app-container">
           <TopBar onChange={this.handleChange} handleAddTask={this.addTask} />
-          <Tasks todos={topBar === '' ? todos : todos.filter(todo => todo.name.includes(topBar))}
+          <Tasks todos={ todos.filter(todo => 
+            todo.name.includes(topBar) &&
+              (option === 'Done' && todo.isDone ||
+                option === 'Active' && !todo.isDone ||
+                option === 'All'))}
             onClickDone={this.handleOnClickDone} onClick={this.handleOnClick} />
-          <BottomBar  onClick={this.handleOption}  onClickClearAllDone={this.handleClearAllDone} />
+          <BottomBar  onClick={this.handleOption} option={option} onClickClearAllDone={this.handleClearAllDone} />
         </div>
       </div>
     );
