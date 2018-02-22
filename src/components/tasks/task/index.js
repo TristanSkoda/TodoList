@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-
-// const duration = 300;
 
 class Task extends Component {
 
   handleClick = event =>{
     event.stopPropagation();
-    this.props.onClickDone();
+    this.props.onClickDelete();
   }
   render() {
     return (

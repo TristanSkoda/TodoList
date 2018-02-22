@@ -6,7 +6,6 @@ class BottomBar extends Component {
   render() {
 
     const {option , onClickClearAllDone} = this.props;
-    console.log('option: ', option === 'All')
     return ( 
       <div className="bottombar-container">
           <button className={option === 'All'? 'selected': ''} onClick={() =>this.props.onClick('All')}>All</button>
