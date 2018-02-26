@@ -8,6 +8,7 @@ class Task extends Component {
     this.props.onClickDelete()
   }
   render() {
+    
     return (
       <div style={this.props.style}
         className={

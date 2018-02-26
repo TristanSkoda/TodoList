@@ -10,12 +10,11 @@
     justify-content: space-between;
     margin-bottom: 1px;
     
-    transition: 1s ease all;
+    
 }
 
 .task-container h2{
     padding-left: 20px;
-    transition: 1s ease all;
     user-select: none;
 }
 
@@ -43,6 +42,5 @@
     user-select: none;
     color: gray;
     text-decoration: line-through;
-    transition: 1s ease all;
 }
     
