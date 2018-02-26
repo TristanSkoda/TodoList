@@ -1,21 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Task from './task'
 
-import './styles.css';
-
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './styles.css'
 
 class Tasks extends Component {
   render() {
     return (
-      <div className="Tasks-container" >         
-        {this.props.todos.map((todo, index)=> <Task onClick={() => this.props.onClick(index)}
-        onClickDone={()=> this.props.onClickDone(index)} doneIsClicked={todo.isDone}  key={index} name={todo.name} /> )}
+      <div className="Tasks-container">
+        {this.props.todos.map(
+          ({ key, style, data: { name, isDone } }, index) => (
+            <Task
+              style={style}
+              onClick={() => this.props.onClick(index)}
+              onClickDelete={() => this.props.onClickDelete(index)}
+              doneIsClicked={isDone}
+              key={index}
+              name={name}
+            />
+          )
+        )}
       </div>
-    );
+    )
   }
 }
 
-export default Tasks;
-
-
+export default Tasks

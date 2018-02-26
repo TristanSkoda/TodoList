@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './styles.css';
-
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-
-// const duration = 300;
+import './styles.css'
 
 class Task extends Component {
-
-  handleClick = event =>{
-    event.stopPropagation();
-    this.props.onClickDone();
+  handleClick = event => {
+    event.stopPropagation()
+    this.props.onClickDelete()
   }
   render() {
+    
     return (
-      <div className={ this.props.doneIsClicked ? 'task-isClicked task-container'  : ' task-container' } onClick={this.props.onClick}>
+      <div style={this.props.style}
+        className={
+          this.props.doneIsClicked
+            ? 'task-isClicked task-container'
+            : ' task-container'
+        }
+        onClick={this.props.onClick}
+      >
         <h2> {this.props.name} </h2>
-        <button onClick={this.handleClick}>Delete</button >
+        <button onClick={this.handleClick}>Delete</button>
       </div>
-    );
+    )
   }
 }
 
-export default Task;
+export default Task
