@@ -1,37 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './styles.css';
+import './styles.css'
 
 class TopBar extends Component {
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super(props)
 
-    this.state= {value: ''}
+    this.state = { value: '' }
   }
-  handleChange = event =>{
-    this.setState({value: event.target.value});
+  handleChange = event => {
+    this.setState({ value: event.target.value })
 
-    this.props.onChange(event.target.value);
+    this.props.onChange(event.target.value)
   }
 
-  handleSubmit = (event) =>{
-    event.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault()
 
-    if(this.state.value !== ''){
-      this.props.handleAddTask(this.state.value);
+    if (this.state.value !== '') {
+      this.props.handleAddTask(this.state.value)
     }
   }
 
   render() {
     return (
       <div className="topbar-container">
-          <form onSubmit={this.handleSubmit} className="topbar-container-form" > 
-            <input type="text" onChange={this.handleChange} placeholder='Enter a task'></input>
-            <button >Submit</button>
-          </form>
+        <form onSubmit={this.handleSubmit} className="topbar-container-form">
+          <input
+            type="text"
+            onChange={this.handleChange}
+            placeholder="Enter a task"
+          />
+          <button>Submit</button>
+        </form>
       </div>
     )
   }
 }
 
-export default TopBar;
+export default TopBar
