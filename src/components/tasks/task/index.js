@@ -9,7 +9,7 @@ class Task extends Component {
   }
   render() {
     return (
-      <div
+      <div style={this.props.style}
         className={
           this.props.doneIsClicked
             ? 'task-isClicked task-container'
