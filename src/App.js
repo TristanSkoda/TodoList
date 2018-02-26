@@ -9,11 +9,40 @@ import Tasks from './components/tasks'
 import TopBar from './components/topbar'
 import BottomBar from './components/bottombar'
 
+const express = require('express');
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
+
+const routes= require('./routes/api')
+
+const app = express();
+
+mongoose.connect('mongodb://localhost/todogo')
+mongoose.Promise = global.Promise
+
+app.use(express.static('public'))
+
+app.use(bodyParser.json())
+
+app.use('/api',routes);
+
+
+
+app.listen(process.env.port || 3000,()=> console)
+
+
+app.use((err, req, res, next)=>{
+  res.status(422).send({error: err.message})
+})
+
+
+
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      todos: [
+      todos: []/*
         { key: '1', data: { name: 'manger', isDone: false } },
         { key: '2', data: { name: 'vaiselle', isDone: false } },
         { key: '3', data: { name: 'marche', isDone: false } },
@@ -27,11 +56,21 @@ class App extends Component {
           key: '10',
           data: { name: 'manger le salut de coucou', isDone: false }
         }
-      ],
+      */,
       topBar: '',
       option: 'All'
     }
   }
+
+componentDidMount =() =>{
+  fetch('/api/todos').then(data=> data.json()).then(json =>{
+    this.setState({
+      todos: json
+    })
+  })
+}
+
+
 
   addTask = name => {
     const todos = this.state.todos
