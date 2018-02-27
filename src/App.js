@@ -116,8 +116,11 @@ class App extends Component {
       todos: this.state.todos.filter(todo => {
         const { key, data: { isDone } } = todo
         if(!isDone){
-          return todo
-        } else keyArray.push(key);
+          return true
+        } else {
+          keyArray.push(key);
+          return false;
+        }
       })
     })
     this.deleteAllDone(keyArray)
