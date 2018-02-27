@@ -13,45 +13,45 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      todos: [] /*
-        { key: '1', data: { name: 'manger', isDone: false } },
-        { key: '2', data: { name: 'vaiselle', isDone: false } },
-        { key: '3', data: { name: 'marche', isDone: false } },
-        { key: '4', data: { name: 'toilette', isDone: false } },
-        { key: '5', data: { name: 'meditation', isDone: false } },
-        { key: '6', data: { name: 'dormire', isDone: false } },
-        { key: '7', data: { name: 'laver le plancher', isDone: false } },
-        { key: '8', data: { name: 'manger', isDone: false } },
-        { key: '9', data: { name: 'toto', isDone: false } },
-        {
-          key: '10',
-          data: { name: 'manger le salut de coucou', isDone: false }
-        }
-      */,
+      todos: [],
       topBar: '',
       option: 'All'
     }
   }
 
   componentDidMount = () => {
+    this.fetchData()
+  }
+
+  fetchData = ()=>{
     fetch('http://localhost:4000/api/todos')
       .then(data => data.json())
-      .then(json => this.setState({ todos: json }))
+      .then(json =>
+        this.setState({
+          todos: json.map(todo => ({
+            _id: todo._id,
+             key: todo._id,
+            data: {
+              name: todo.name,
+              isDone: todo.isDone
+            }
+          }))
+        })
+      )
   }
 
   addTask = name => {
     const todos = this.state.todos
     const newTodo = {
-      key: 't' + Date.now(),
-      data: {
+      
         name,
         isDone: false
-      }
+      
     }
 
-    todos.push(newTodo)
-    this.setState({ todos })
-    
+    //todos.push(newTodo)
+    //this.setState({ todos })
+
     fetch('http://localhost:4000/api/todos', {
       method: 'POST',
       headers: {
@@ -59,103 +59,103 @@ class App extends Component {
       },
       body: JSON.stringify(newTodo)
     })
+    this.fetchData()
+
+
+
   }
 
   updateTask = todo => {
-    const { key, data: { name, isDone } } = todo
-    fetch(`http://localhost:4000/api/todo/${todo.key}`, {
+    const { _id, data: { name, isDone } } = todo
+    fetch(`http://localhost:4000/api/todo/${_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ key, data: { name, isDone: !isDone } })
+      body: JSON.stringify({ _id, data: { name, isDone: !isDone } })
     })
   }
 
-  handleOnClick = pIndex => {
+  handleOnClick = id => {
     this.setState({
-      todos: this.state.todos.map((todo, index) => {
-        const { key, data: { name, isDone } } = todo
-        if (index === pIndex) {
+      todos: this.state.todos.map(todo => {
+        const { _id, data: { name, isDone } } = todo
+        if (_id === id) {
           this.updateTask(todo)
-          return { key, data: { name, isDone: !isDone } }
+          return { ...todo, data: { name, isDone: !isDone } }
         } else return todo
       })
     })
   }
-  
+
   handleChange = taskName => this.setState({ topBar: taskName })
 
-  handleOnClickDelete = pKey => {
-    fetch(`http://localhost:4000/api/todo/${pKey}`, {
+  handleOnClickDelete = id => {
+    fetch(`http://localhost:4000/api/todo/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
     })
     this.setState({
-      todos: this.state.todos.filter(todo => todo.key !== pKey)
+      todos: this.state.todos.filter(todo => todo._id !== id)
     })
   }
 
-  deleteAllDone = pKeyArray => {
+  deleteAllDone = pIdArray => {
     fetch(`http://localhost:4000/api/todo/deleteDone`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
       },
-      body:JSON.stringify(pKeyArray)
+      body: JSON.stringify(pIdArray)
     })
-    console.log('body',JSON.stringify(pKeyArray[0]))
   }
 
-
-  handleClearAllDone = () =>{
-    const keyArray = []
+  handleClearAllDone = () => {
+    const idArray = []
     this.setState({
       todos: this.state.todos.filter(todo => {
-        const { key, data: { isDone } } = todo
-        if(!isDone){
+        const { _id, data: { isDone } } = todo
+        if (!isDone) {
           return true
         } else {
-          keyArray.push(key);
-          return false;
+          idArray.push(_id)
+          return false
         }
       })
     })
-    this.deleteAllDone(keyArray)
+    this.deleteAllDone(idArray)
   }
-    
-
-
 
   handleOption = pOption => this.setState({ option: pOption })
 
   getDefaultStyles = () =>
     this.state.todos.map(todo => ({
       ...todo,
+      
       style: { height: 0, opacity: 1 }
     }))
 
   getListTodoAndStyle = () => {
     const { topBar, option, todos } = this.state
+    console.log('todos: ', todos);
+    
     return todos
       .filter(
-        ({ data: { name, isDone } }) =>
+        ({data: { name, isDone }}) =>
           name.includes(topBar) &&
           ((option === 'Done' && isDone) ||
             (option === 'Active' && !isDone) ||
             option === 'All')
       )
-      .map(todo => {
-        return {
-          ...todo,
-          style: {
-            height: spring(60, presets.gentle),
-            opacity: spring(1, presets.gentle)
-          }
+      .map(todo => ({
+        ...todo,
+        style: {
+          height: spring(60, presets.gentle),
+          opacity: spring(1, presets.gentle)
         }
-      })
+      }))
   }
 
   willEnter() {
@@ -174,6 +174,9 @@ class App extends Component {
 
   render() {
     const { option } = this.state
+
+    console.log('styles: ',this.getListTodoAndStyle());
+    
     return (
       <div className="App">
         <h1>Todo List</h1>
@@ -191,6 +194,7 @@ class App extends Component {
                 todos={styles}
                 onClickDelete={this.handleOnClickDelete}
                 onClick={this.handleOnClick}
+                
               />
             )}
           </TransitionMotion>
