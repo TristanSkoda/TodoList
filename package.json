@@ -2,6 +2,7 @@
   "name": "todolist",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000/",
   "dependencies": {
     "prettier": "^1.10.2",
     "react": "^16.2.0",

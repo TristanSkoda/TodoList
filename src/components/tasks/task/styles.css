@@ -34,9 +34,6 @@
     user-select: none;
 }
 
-.task-isClicked{
-    
-}
 .task-isClicked h2{
     transform: translateX(30px);
     user-select: none;
