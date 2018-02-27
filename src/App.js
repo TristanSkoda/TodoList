@@ -9,40 +9,11 @@ import Tasks from './components/tasks'
 import TopBar from './components/topbar'
 import BottomBar from './components/bottombar'
 
-const express = require('express');
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
-
-
-const routes= require('./routes/api')
-
-const app = express();
-
-mongoose.connect('mongodb://localhost/todogo')
-mongoose.Promise = global.Promise
-
-app.use(express.static('public'))
-
-app.use(bodyParser.json())
-
-app.use('/api',routes);
-
-
-
-app.listen(process.env.port || 3000,()=> console)
-
-
-app.use((err, req, res, next)=>{
-  res.status(422).send({error: err.message})
-})
-
-
-
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      todos: []/*
+      todos: [] /*
         { key: '1', data: { name: 'manger', isDone: false } },
         { key: '2', data: { name: 'vaiselle', isDone: false } },
         { key: '3', data: { name: 'marche', isDone: false } },
@@ -62,46 +33,98 @@ class App extends Component {
     }
   }
 
-componentDidMount =() =>{
-  fetch('/api/todos').then(data=> data.json()).then(json =>{
-    this.setState({
-      todos: json
-    })
-  })
-}
-
-
+  componentDidMount = () => {
+    fetch('http://localhost:4000/api/todos')
+      .then(data => data.json())
+      .then(json => this.setState({ todos: json }))
+  }
 
   addTask = name => {
     const todos = this.state.todos
-    todos.push({
+    const newTodo = {
       key: 't' + Date.now(),
-      data: { name, isDone: false }
-    })
+      data: {
+        name,
+        isDone: false
+      }
+    }
+
+    todos.push(newTodo)
     this.setState({ todos })
+    
+    fetch('http://localhost:4000/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newTodo)
+    })
   }
 
-  handleOnClick = pIndex =>
+  updateTask = todo => {
+    const { key, data: { name, isDone } } = todo
+    fetch(`http://localhost:4000/api/todo/${todo.key}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ key, data: { name, isDone: !isDone } })
+    })
+  }
+
+  handleOnClick = pIndex => {
     this.setState({
       todos: this.state.todos.map((todo, index) => {
         const { key, data: { name, isDone } } = todo
-        return index === pIndex
-          ? { key, data: { name, isDone: !isDone } }
-          : todo
+        if (index === pIndex) {
+          this.updateTask(todo)
+          return { key, data: { name, isDone: !isDone } }
+        } else return todo
       })
     })
-
+  }
+  
   handleChange = taskName => this.setState({ topBar: taskName })
 
-  handleOnClickDelete = pIndex =>
-    this.setState({
-      todos: this.state.todos.filter((todo, index) => index !== pIndex)
+  handleOnClickDelete = pKey => {
+    fetch(`http://localhost:4000/api/todo/${pKey}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
+    this.setState({
+      todos: this.state.todos.filter(todo => todo.key !== pKey)
+    })
+  }
 
-  handleClearAllDone = () =>
-    this.setState({
-      todos: this.state.todos.filter(({ data: { isDone } }) => !isDone)
+  deleteAllDone = pKeyArray => {
+    fetch(`http://localhost:4000/api/todo/deleteDone`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(pKeyArray)
     })
+    console.log('body',JSON.stringify(pKeyArray[0]))
+  }
+
+
+  handleClearAllDone = () =>{
+    const keyArray = []
+    this.setState({
+      todos: this.state.todos.filter(todo => {
+        const { key, data: { isDone } } = todo
+        if(!isDone){
+          return todo
+        } else keyArray.push(key);
+      })
+    })
+    this.deleteAllDone(keyArray)
+  }
+    
+
+
 
   handleOption = pOption => this.setState({ option: pOption })
 

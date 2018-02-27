@@ -12,7 +12,7 @@ class Tasks extends Component {
             <Task
               style={style}
               onClick={() => this.props.onClick(index)}
-              onClickDelete={() => this.props.onClickDelete(index)}
+              onClickDelete={() => this.props.onClickDelete(key)}
               doneIsClicked={isDone}
               key={index}
               name={name}

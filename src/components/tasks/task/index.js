@@ -8,9 +8,9 @@ class Task extends Component {
     this.props.onClickDelete()
   }
   render() {
-    
     return (
-      <div style={this.props.style}
+      <div
+        style={this.props.style}
         className={
           this.props.doneIsClicked
             ? 'task-isClicked task-container'

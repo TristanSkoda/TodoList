@@ -2,11 +2,8 @@
   "name": "todolist",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000/",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "mongoose": "^5.0.7",
-    "nodemon": "^1.15.1",
     "prettier": "^1.10.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
