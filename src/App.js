@@ -26,43 +26,46 @@ class App extends Component {
   fetchData = ()=>{
     fetch('http://localhost:4000/api/todos')
       .then(data => data.json())
-      .then(json =>
-        this.setState({
-          todos: json.map(todo => ({
-            _id: todo._id,
-             key: todo._id,
-            data: {
-              name: todo.name,
-              isDone: todo.isDone
-            }
-          }))
-        })
-      )
+      .then(json => this.mapData(json))
+      .then(goodTodos => {
+        this.setState({ todos: goodTodos })
+    })
+    
   }
-
+  
+  mapData = data =>{
+    return data.map(todo => ({
+      _id: todo._id,
+      key: todo._id,
+      data: {
+        name: todo.name,
+        isDone: todo.isDone
+      }
+    }))
+  }
+  
   addTask = name => {
     const todos = this.state.todos
     const newTodo = {
-      
-        name,
-        isDone: false
-      
+      name,
+      isDone: false 
     }
-
-    //todos.push(newTodo)
-    //this.setState({ todos })
-
+    
     fetch('http://localhost:4000/api/todos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(newTodo)
+    }).then(todo => todo.json())
+    .then(todo => this.mapData([todo]))
+    .then(goodTodos => {
+      todos.push(goodTodos[0])
+      this.setState({ todos })
     })
-    this.fetchData()
+    
 
-
-
+    
   }
 
   updateTask = todo => {
@@ -139,8 +142,6 @@ class App extends Component {
 
   getListTodoAndStyle = () => {
     const { topBar, option, todos } = this.state
-    console.log('todos: ', todos);
-    
     return todos
       .filter(
         ({data: { name, isDone }}) =>
@@ -174,8 +175,6 @@ class App extends Component {
 
   render() {
     const { option } = this.state
-
-    console.log('styles: ',this.getListTodoAndStyle());
     
     return (
       <div className="App">

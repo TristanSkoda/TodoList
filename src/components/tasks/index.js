@@ -7,7 +7,6 @@ class Tasks extends Component {
   
   
   render() {
-    // console.log('todos Tasks:  ',this.props.todos )
     return (
       <div className="Tasks-container">
         {this.props.todos.map(({ key, style, data: { name, isDone } }) => (
